@@ -22,8 +22,9 @@ namespace TimeClient
         {
             while (true)
             {
-                Thread.Sleep(500);
-                byte[] buffer = Encoding.ASCII.GetBytes("get time");
+                Console.WriteLine("Enter a request: ");
+                string req = Console.ReadLine();
+                byte[] buffer = Encoding.ASCII.GetBytes(req);
                 _clientSocket.Send(buffer);
 
                 byte[] receiveBuf = new byte[1024];
@@ -44,7 +45,7 @@ namespace TimeClient
                 try
                 {
                     attempts++;
-                    _clientSocket.Connect(IPAddress.Loopback, 5678);
+                    _clientSocket.Connect(IPAddress.Loopback, 35000);
                 }
                 catch (SocketException)
                 {
